@@ -10,11 +10,11 @@ imports MATCHING-FUNCTION
 // ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* //
 
 rule <thread> ... <k>
-        match["HIGHERNAMEMATCH"]( P:HigherPat ; Q:HigherPat )
+        match["TEXTMATCH"]( P:HigherPat ; Q:HigherPat )
      => #if toString( P:HigherPat ) ==String toString( Q:HigherPat ) #then
         Nil
         #else
-        #(MATCHFAIL)["HIGHERNAMEMATCH"]
+        #(MATCHFAIL)["TEXTMATCH"]
         #fi
         ... </k> ... </thread>
 

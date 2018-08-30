@@ -488,20 +488,20 @@ syntax JoinedHigerNames ::= List{HigherName, ";"}
 syntax JoinedHigerNamePats ::= List{HigherNamePat, ";"}
 
 syntax JoinedHigherNamesPats ::= List{HigherNamePats, ";"}
-
+/*
 syntax HigherProcNoVars ::=
           // Transition alias
-            "for" "(" JoinedHigherNamesPats "<-" JoinedHigerNames ")" "(" HigherJoins ")" "{" HigherProc "}"
+            "jfor" "(" JoinedHigherNamesPats "<-" JoinedHigerNames ")" "(" HigherJoins ")" "{" HigherProc "}"
           // Persistent version
-          | "for" "(" JoinedHigherNamesPats "<=" JoinedHigerNames ")" "(" HigherPersistentJoins ")" "{" HigherProc "}"
+          | "jfor" "(" JoinedHigherNamesPats "<=" JoinedHigerNames ")" "(" HigherPersistentJoins ")" "{" HigherProc "}"
 
 syntax HigherProcPatNoVars ::=
           // Alias for binding purposes
-            "for" "(" JoinedHigherNamesPats "<-" JoinedHigerNamePats ")" "{" HigherProcPat "}"
+            "jfor" "(" JoinedHigherNamesPats "<-" JoinedHigerNamePats ")" "{" HigherProcPat "}"
           // Transition alias
-          | "for" "(" JoinedHigherNamesPats "<-" JoinedHigerNamePats ")" "(" HigherJoinPats ")" "{" HigherProcPat "}"
+          | "jfor" "(" JoinedHigherNamesPats "<-" JoinedHigerNamePats ")" "(" HigherJoinPats ")" "{" HigherProcPat "}"
           // Persistent version
-          | "for" "(" JoinedHigherNamesPats "<=" JoinedHigerNamePats ")" "(" HigherPersistentJoinPats ")" "{" HigherProcPat "}"
-
+          | "jfor" "(" JoinedHigherNamesPats "<=" JoinedHigerNamePats ")" "(" HigherPersistentJoinPats ")" "{" HigherProcPat "}"
+*/
 
 endmodule

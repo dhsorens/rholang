@@ -114,6 +114,22 @@ rule <thread> ...
         <OutData> S ; L </OutData>
     </thread>)
 
+// And for a fail in matching a pattern within a pattern (textmatch fail)
+rule <thread> ...
+        // The trigger
+        <k> #(MATCHFAIL)[ "TEXTMATCH" ] ~> REST:K => .K </k>
+        // Check to make sure the receive is not persistent
+        <In> for(D:HigherNamePats <- C){ Q:HigherProcPat } </In>
+        // Keep the in-thread intact, deleting everything else
+        <Out> O => .K </Out>
+        <OutData> S:Int ; L:Set => .K </OutData>
+        <subst> B => .K </subst>
+    ... </thread>
+    // Recreate the out-thread; these will not try to match each other again
+    (.Bag => <thread>
+        <Out> O </Out>
+        <OutData> S ; L </OutData>
+    </thread>)
 
 // When we've finished matching, we're ready to execute Q after having replaced all the
 // variables

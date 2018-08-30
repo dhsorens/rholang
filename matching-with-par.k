@@ -447,8 +447,6 @@ rule <thread> ... <ParMatch> ...
                      (#(MATCHFAIL)[ TF:String ] ~> M:K => .) ~> #(PARPAUSE)[S:String,ID]
               ... </k> ... </thread>
                   <ParMatchCounter> ID </ParMatchCounter>
-                  //requires (TF ==String "TFSTDMATCH") orBool (TF ==String "TFHIGHERNAMEMATCH")
-
 
 // There are no more options for possible matches (go back down)
 // This is for a non-variable
