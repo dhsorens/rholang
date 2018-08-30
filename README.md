@@ -1,2 +1,2 @@
-# rholang
+# Rholang
 Rholang K-framework
