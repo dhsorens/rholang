@@ -1,0 +1,14 @@
+// Logical connectives are slightly nuanced.
+
+// This is the same example as "Finding free vars with logical or"
+// The first match should not execute due to the
+// free variable in the pattern.
+// The second match, however, should work fine,
+// and this should rewrite to
+//    @Nil!("success")
+
+match for(@{@{x \/ Nil}!(Nil)} <- @Nil){ Nil }
+{
+  x => { x }
+  _ => {@Nil!("success")}
+}

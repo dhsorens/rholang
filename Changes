@@ -1,0 +1,20 @@
+Starting joins
+Exact pattern within pattern matching
+
+
+[ ] Matching has to evaluate expressions before sending them off
+	[ ] But not for channels
+[ ] Chanmatch doesn't (yet) care about the order of 
+
+
+NEXT:
+
+6. "ChanMatch" ... needs to actually work ... !
+8. The eg in "Finding-free-vars-with-logical-or-between-channels" is probably incorrect...or is it? Mike will say...
+
+
+QUESTION:
+> Is chan!() allowed, b/c of the empty list?
+> change the match function to PatternMatch or something like that?
+
+NOTES:

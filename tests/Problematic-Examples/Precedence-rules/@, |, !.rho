@@ -1,0 +1,2 @@
+// Give examples of precedence rules for @ | and !. Show which binds more tightly than the others
+// ! weakest, then | (barely) and then @

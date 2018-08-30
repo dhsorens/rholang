@@ -1,0 +1,2 @@
+// Contract should desugar immediately, and match with surprising things because of it. Ask Kyle about this.
+// You might want to sort of comb through the k-framework to do this.

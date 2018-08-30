@@ -1,0 +1,63 @@
+(1) (You can think of the whole program as a single pattern)
+You can't capture anything with a variable,
+a logical connective, a => from match, a ; from
+joins,
+> You need to check the whole program to make
+sure these don't happen out of context
+> No free variables
+> No (global) logical connectives
+> No (global) joins, etc.
+
+
+(2) Look through the looking glass only once
+> You can't match anything inside of the pattern
+
+
+
+(3) What happens with matching a "for" pattern
+> (check that the channels are the same)
+
+
+
+
+(4) What it means for two channels to be the same
+> commutativity modulo
+> expressions evaluated
+> | Nil's are nothing and must be accounted for
+(In that sense it's like a monoid, but for
+channels it's not a commutative monoid.)
+<>>>>>> BUT IN PATTERNS WITHIN PATTERNS, CHANNEL EQUIVALENCE DOES NOT APPLY. <<<<<<<>
+
+
+(5) Greedy variables
+*** PROBLEMATIC EXAMPLE:
+for(@ x | y <- @10){ y | x } |
+@10!( @Nil!("first") | @Nil!("second") )
+** Not problematic; just remember that this usually results in one of the vars being
+** greedy in practice. (K might do this alphabetically, but there is full nondeterminism
+** there if you ask for it.)>
+
+
+
+TO INCLUDE:
+** ILLEGAL **
+match
+match @Nil!(Nil) { x => {@Nil!(x)} }
+{
+match @Nil!(Nil) { y } => { y }
+}
+
+
+for( @ x )
+
+for( @ x!(y) <- @Nil){ Nil } |
+@Nil!( @1!(1) | @2!(2) )
+
+*** You should note some of the higher mathematical
+ideas that are going on with rholang, to underscore
+some of the more unifying principles of the
+language (!!!) ***
+>>>> There should be a page for this!
+... Like what?
+
+(Infinite Jest)
