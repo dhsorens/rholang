@@ -5,7 +5,7 @@ imports RHO-SYNTAX
 configuration <T color="yellow">
                 <thread multiplicity="*" color="purple">
                   // When we initiate our program, fvInitial( ) checks for free variables
-                  <k multiplicity="*" color="red">  $PGM:Proc  </k>
+                  <k multiplicity="*" color="red">  fvInitial( $PGM:Proc )  </k>
                   <In multiplicity="*" color="blue"> .K </In>
                   <Out multiplicity="*" color="green"> .K </Out>
                   <InData multiplicity="*"> .K </InData>

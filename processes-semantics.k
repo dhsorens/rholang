@@ -23,11 +23,11 @@ rule <thread> ... <k> ... P1:HigherProcPat | P2:HigherProcPat => P1 ... </k> ...
 // nontrivial channels, or more. If we only include one the recursion will go on
 // infinitely.
 rule <thread>  ... <k> new X:Id, Y:Id, Z:Ids in { P:HigherProcPat }
-             => new Y:Id, Z:Ids in { P[ @ #(!I:Int) / X] } </k>  ... </thread> [newchannelcreation]
+             => new Y:Id, Z:Ids in { P[ @ unforgeable(!I:Int) / X] } </k>  ... </thread> [newchannelcreation]
 
 // New construct
 rule <thread> ...
-        <k> new X:Id in { P:HigherProcPat } => P[ @ #(!I:Int) / X] </k>
+        <k> new X:Id in { P:HigherProcPat } => P[ @ unforgeable(!I:Int) / X] </k>
      ... </thread> [newchannelcreation]
 
 

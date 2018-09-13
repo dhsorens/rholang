@@ -173,7 +173,7 @@ syntax HigherProcNoVars ::=
               // The match process
               | "match" HigherProc "{" HigherMatchCases "}"
               // Syntax for new names--the whole reason for "Higher" anything
-              | "#(" Int ")"
+              | "unforgeable(" Int ")"
               | HigherProc "|" HigherProc [left]
               | "{" HigherProc "}" [bracket]
 
@@ -248,7 +248,7 @@ syntax HigherProcPatNoVars ::=
             // Match
             | "match" HigherProcPat "{" HigherMatchCasesPat "}"
             // Syntax for new names--the whole reason for "Higher" anything
-            | "#(" Int ")"
+            | "unforgeable(" Int ")"
             // Parallel
             | HigherProcPat "|" HigherProcPat [left,ndbParallelProcesses]
             // Bracket

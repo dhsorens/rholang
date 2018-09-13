@@ -231,8 +231,8 @@ rule <thread> ... <k> ... matchstdform[S:String](
                                 "new"[X2:Id,L2:Ids][R:HigherProcPat] ;
                                 true)
           => matchstdform[S](
-                    "new"[L1][ P[@ #(!I:Int) / X1] ] ;
-                    "new"[L2][ R[@ #(!I:Int) / X2] ] ;
+                    "new"[L1][ P[@ unforgeable(!I:Int) / X1] ] ;
+                    "new"[L2][ R[@ unforgeable(!I:Int) / X2] ] ;
                     true) ... </k> ... </thread>
 
 // (ii) If either one creates more new variables than the other we fail

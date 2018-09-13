@@ -19,5 +19,4 @@ rule <thread> ... <k>
         ... </k> ... </thread>
 
 
-
 endmodule
