@@ -153,7 +153,7 @@ We can, however, correctly write
 
     for( @{@{ 10 \/ 20 }}!(z) <- @Nil ){ @Nil!(z) }
 
-which listens on `@Nil` for a process which sends either to `@10` or to `@20`. Whatever is being sent is grabbed and sent over `@Nil` in the body. If we use `/\` in a pattern, any free variables which are in the pattern will be bound to their corresponding parts. However, if we use `\/`, none of the variables in the parse tree below the node are bound. In particular, if `P1 \/ P2` is in a pattern, any free variables in either `P1` or `P2` are globally free, and thus not allowed.
+which listens on `@Nil` for a process which sends either to `@10` or to `@20`. Whatever is being sent is grabbed and sent over `@Nil` in the body. If we use `/\` in a pattern, any free variables which are in the pattern will be bound to their corresponding parts. However, if we use `\/`, none of the variables in the parse tree below the node are bound. In particular, if `P1 \/ P2` is in a pattern, the program will fail to run if any free variables in `P1` or `P2` appear in the body, since they cannot be guaranteed to bind to anything.
 
 ## Wildcards vs Variables
 There is an important, somewhat subtle difference between wildcards and variables in Rholang. A wildcard can be placed anywhere that a *free* variable can be placed, meaning that wildcards can be part of patterns but cannot be part of processes. For example, we cannot write
