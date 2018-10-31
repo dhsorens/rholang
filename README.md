@@ -27,7 +27,87 @@ function, without using cells, to do it.
 
 Rules should be written without cells as much as possible.
 
-## Type System
+## Type system
 The type system is the mathematical core of the framework, and greatly simplifies pattern-matching
 in a nice, coherent theory. In Rholang, any program can be thought of as a pattern that only matches
-to one thing. 
+to one thing. This observation unifies all of Rholang code as patterns that can match to a different
+number of things.
+
+In this line of thought, for each pattern (or process) in Rholang we can assign a type, which is
+written as an abstract syntax tree (AST). The AST is defined recursively. A pattern of the form:
+
+    for( NamePatterns <- Channel ){ Body }
+
+would yield something like
+
+                    "LinearListen"
+                        /     \
+                     "bind"  type(Channel)
+                     /    \
+      type(NamePatterns)  type(Body)
+
+and we finish the AST by expanding along the types of `NamePatterns`, `Body`, and `Channel`.
+As other examples,
+
+    Name!(TupleOfProcesses)
+
+might yield something like
+
+         "SingleSend"
+           /      \
+    type(Name)   type(TupleOfProcesses)
+
+and
+
+    @ Process
+
+might yield something like
+
+          "quote"
+             |
+       type(Process)
+
+*(Note that the resulting type doesn't have to be a binary tree, but in the implementation it is for
+simplicity. In cases like the one above, the second branch is a special `#truncate` node.)*
+
+For Rholang, this kind of type system is natural because terms are defined and matched in an
+inherently recursive way. When we match, we check that the top level matches, and then move inward.
+Since this type system is explicitly for matching, we lose the property of a listen that it can be
+thought of as a tagged function type, where the tag is the channel it's listening on and the
+function type is `type(NamePatterns) -> type(Body)`. In the future, it might be useful to enrich the
+type system to include this, or to give channels types that include the pattern a `for` is listening
+for, or the pattern a channel is sending. This might open the door to a more extensive set of
+provable properties for Rholang code.
+
+The full definition can be found in `type.k`. Each node has the syntax
+
+    [ "NodeName" ;; type[LeftNode] ;; type[RightNode] ]
+
+## The inclusion predicate
+A `Process` matches a `Pattern` if one can start with `type(Pattern)` and end up with
+`type(Process)` by doing any combination of the following:
+- attaching a process onto a free process variable leaf on `type(Pattern)`
+- attaching a name onto a free name variable leaf on `type(Pattern)`
+- attaching anything to a free wildcard leaf on `type(Pattern)`
+- attaching anything to a simple type leaf on `type(Pattern)` that matches the simple type
+- choosing one of the subtrees spawning from a free `\/` node on `type(Pattern)`
+- replacing the subtree spawning from a free `/\` node into a type matching both of the branches in
+`type(Pattern)` and the corresponding subtree in `type(Process)`
+- replacing the subtree spawning from a free `~` with a subtree whose type does *not* match that subtree
+
+Here "free" refers to a subtree that's not part of a self contained pattern within the term.
+The inclusion predicate `#isIn` checks via a recursive algorithm outlined in `is-in.k`.
+
+## Equality of types
+We say two types are equal iff `Type1 #isIn Type2` and `Type2 #isIn Type1` are both `true`. This
+amounts to just checking tree equality.
+
+
+## Deciding if a type corresponds to a process or a name
+The predicate `#isProc` (resp. `#isName`) checks to see that a given type is a process (resp. name),
+which amounts to checking that they only match one process (resp. name), or that the type only has
+one inhabitant.
+
+This amounts to checking that there are no globally free variables (i.e. free variable leaves), or
+wildcards outside of self-contained patterns, or logical connectives where they ought not be, etc.
+Essentially, checking that the operations for inclusions don't yield any other types.
