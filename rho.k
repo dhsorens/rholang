@@ -1,35 +1,44 @@
-require "substitution.k"
-
 require "rho-syntax.k"
 require "configuration.k"
-require "processes-semantics.k"
-require "sending-receiving.k"
-require "persistent-sending-receiving.k"
-require "match-process.k"
-require "matching-function.k"
-require "exact-matching-function.k"
-require "specific-matching-rules.k"
-require "matching-with-par.k"
-require "joins.k"
-require "free.k"
-require "program-restrictions.k"
+require "initial-checks.k"
+require "normalizer.k"
+require "type.k"
+require "is-in.k"
+require "is-equal-to.k"
+require "is-proc.k"
+require "is-name.k"
+require "is-public.k"
+require "type2proc.k"
+require "pattern-match.k"
+// require "processes.k"
+require "method.k"
+require "bundle.k"
+require "match.k"
+// require "send.k"
+// require "receive.k"
+// require "tuple-space.k"
 
 module RHO
 imports DOMAINS
 
 imports RHO-SYNTAX
 imports CONFIGURATION
-imports PROCESSES-SEMANTICS
-imports SENDING-RECEIVING
-imports PERSISTENT-SENDING-RECEIVING
-imports MATCH-PROCESS
-imports MATCHING-FUNCTION
-imports EXACT-MATCHING-FUNCTION
-imports SPECIFIC-MATCHING-RULES
-imports MATCHING-WITH-PAR
-imports JOINS
-imports FREE
-imports PROGRAM-RESTRICTIONS
-
+imports INITIAL-CHECKS
+imports NORMALIZER
+imports TYPE
+imports IS-IN
+imports IS-EQUAL-TO
+imports IS-PROC
+imports IS-NAME
+imports IS-PUBLIC
+imports TYPE2PROC
+imports PATTERN-MATCH
+// imports PROCESSES
+imports METHOD
+imports BUNDLE
+imports MATCH
+// imports SEND
+// imports RECEIVE
+// imports TUPLE-SPACE
 
 endmodule
