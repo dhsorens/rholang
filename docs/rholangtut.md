@@ -8,7 +8,8 @@ Rholang is completely asynchronous, in the sense that while you can read a messa
 
 ## Getting started
 
-There is not an IDE for Rholang. Get started with Rholang by selecting one of the options below.
+Get started with Rholang by selecting one of the options below.
+* __Cryptofex__ - Rholang (and more) IDE created by Pyrofex. [Download Cryptofex](https://cryptofex.io/)
 * __Run Rholang on RNode__ - Write Rholang contracts in an editor of your choice and run them on RNode using either the REPL or EVAL modes. [Get started](https://github.com/rchain/rchain/releases) with the latest version of RNode.
 * __Run Rholang on a web interface__ - This [web interface](http://rchain.cloud) was created by a RChain community member.
 * __Write Rholang using an IntelliJ plugin__ - This [Rholang IntelliJ plugin](https://github.com/tgrospic/rholang-idea) was created by a RChain community member.
@@ -27,7 +28,7 @@ The names are created with the construct
 
 In the above example, the name `someName` is private. By "private", we mean that no other process can send or receive messages over this channel unless we explicitly send its name to the other process.  
 
-If rholang is running on the blockchain, the messages sent on this channel will be publicly visible, so it is not "private" in the sense of being secret.  Channels created with `new` cannot be mentioned explicitly in rholang source code.  Even if you see the bits of a private name on the blockchain, there is no language production to turn those bits back into the name.  
+If Rholang is running on the blockchain, the messages sent on this channel will be publicly visible, so it is not "private" in the sense of being secret.  Channels created with `new` cannot be mentioned explicitly in Rholang source code.  Even if you see the bits of a private name on the blockchain, there is no language production to turn those bits back into the name.  
 
 We sometimes use the term "unforgeable" to describe these names when we want to emphasize the inability to construct them from bits.
 
