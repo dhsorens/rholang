@@ -31,4 +31,4 @@
 * Finish Rholang manual
 * Finish Rholang tutorial
 * Second interpreter in Haskell [current interpreter](https://rchain.atlassian.net/wiki/spaces/CORE/pages/506331242/Rholang+interpreter+overview)
-* Rholang eductaion
+* Rholang education
