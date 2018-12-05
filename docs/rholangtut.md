@@ -139,7 +139,7 @@ Finally, channels also respect a change in variable name (alpha equivalence), so
 
 5-6. We send the string processes `"Hello, world!"` and `"Hola, mundo!"` on the channel whose name is stored in the variable `helloWorld`.  The order of processing is nondeterministic.
 
-## Contracts as sugar for replicated receive
+## Contracts as sugar for persistent receive
 
     1 new HelloWorld, stdout(`rho:io:stdout`) in {
     2   contract HelloWorld(@text) = {
@@ -151,7 +151,7 @@ Finally, channels also respect a change in variable name (alpha equivalence), so
 
 2) The only difference between this example and the last one is this line.  The `contract` production is syntactic sugar.  The process `contract Name(...formals) = { P }` means the same as `for (...formals <= Name) { P }`.
 
-## Replicated send
+## Persistent send
 
     1 new HelloWorld, stdout(`rho:io:stdout`), stderr(`rho:io:stderr`) in {
     2   HelloWorld!!("Hello, world!") |
