@@ -137,7 +137,7 @@ Finally, channels also respect a change in variable name (alpha equivalence), so
 
 2) Instead of listening for only a single message, a *persistent receive*, `for( ... <= ... ){ ... }`, will spawn a copy of the body for each message received.
 
-5-6) We send the string processes `"Hello, world!"` and `"Hola, mundo!"` on the channel whose name is stored in the variable `helloWorld`.  It is non-deterministic which message will be processed first.
+5-6) We send the string processes `"Hello, world!"` and `"Hola, mundo!"` on the channel whose name is stored in the variable `helloWorld`.  The order of processing is nondeterministic.
 
 ## Contracts as sugar for replicated receive
 
