@@ -103,7 +103,6 @@ It is possible to write one single name in several different ways. For example, 
 Any message sent over these channels can be received by listening on the channel `@12`.  There are other instances in which a name can be written in more than one way.  The guiding principle for this comes from the RHO calculus: if `P` and `Q` are equivalent processes, then `@P` and `@Q` are equivalent names.
 
 The par `|` operator is associative, commutative, and has the process `Nil` as its identity. This amounts to the following:
-
 	(i) `P` and `P | Nil` are equivalent
  	(ii) `P | Q` and `Q | P` are equivalent
 	(iii) `(P | Q) | R` and `P | (Q | R)` are equivalent
