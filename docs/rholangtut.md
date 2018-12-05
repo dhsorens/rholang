@@ -104,15 +104,15 @@ Any message sent over these channels can be received by listening on the channel
 
 The par `|` operator is associative, commutative, and has the process `Nil` as its identity. This amounts to the following:
 
-	  (i) `P` and `P | Nil` are equivalent
- 	 (ii) `P | Q` and `Q | P` are equivalent
-	  (iii) `(P | Q) | R` and `P | (Q | R)` are equivalent
+	(i) `P` and `P | Nil` are equivalent
+ 	(ii) `P | Q` and `Q | P` are equivalent
+	(iii) `(P | Q) | R` and `P | (Q | R)` are equivalent
 
 In particular, all of the following channels are equivalent:
 
- 	 @{P | Q}
-	  @{Q | P}
-	  @{P | Nil | Q}
+ 	@{P | Q}
+	@{Q | P}
+	@{P | Nil | Q}
 
 Before using a channel, Rholang first evaluates expressions and accounts for these `|` rules at the top level--but only at the top level.  This is a big departure from the RHO calculus!  This means that if an arithmetic expression forms part of a pattern within a pattern, it is left untouched. Because of this,
 
