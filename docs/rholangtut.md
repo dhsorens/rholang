@@ -18,9 +18,9 @@ Get started with Rholang by selecting one of the options below.
 Rholang has two kinds of values: processes and names.
 
 ### Names
-A name represents a communication channel. You can sent messages to a name or you can receive a message from a name. 
+A name represents a communication channel. You can send messages to a name or you can receive a message from a name. 
 
-The names are created with the construct
+The names are created with the `new` construct:
  
     new someName in {
     //... code using someName
@@ -32,9 +32,9 @@ If Rholang is running on the blockchain, the messages sent on this channel will 
 
 We sometimes use the term "unforgeable" to describe these names when we want to emphasize the inability to construct them from bits.
 
-Receiving messages over a channel is done using the `for` construction
+Receiving messages over a channel is done using the `for` construct:
 
-    for( x <- channel1, y <- channel2) {
+    for( x1 <- channel1, ..., xn <- channeln) {
     ...
     }
 
