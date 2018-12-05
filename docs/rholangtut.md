@@ -86,13 +86,13 @@ The following program will print the text `"Hello, world"` to a console.
     5   }
     6 }
 
-1) This line declares a new name-valued variable `helloWorld` and assigns to it a newly-created private name.  
+1. This line declares a new name-valued variable `helloWorld` and assigns to it a newly-created private name.  
 
-2) Every name is of the form `@P`, where `P` is a Rholang process.  The `!` production takes a name `n` on its left and a process `P` on its right, then sends `@P` over the channel named `n`.  Line 2 forms the name `@"Hello, world"` and sends it on the channel whose name is stored in the variable `helloWorld`.
+2. Every name is of the form `@P`, where `P` is a Rholang process.  The `!` production takes a name `n` on its left and a process `P` on its right, then sends `@P` over the channel named `n`.  Line 2 forms the name `@"Hello, world"` and sends it on the channel whose name is stored in the variable `helloWorld`.
 
-3) This `for` production creates a process that waits for a single message to be sent on the channel whose name is stored in the variable `helloWorld`.  The pattern `@text` gets matched against the serialized process, binding the process-valued variable `text` to the original process that was sent.
+3. This `for` production creates a process that waits for a single message to be sent on the channel whose name is stored in the variable `helloWorld`.  The pattern `@text` gets matched against the serialized process, binding the process-valued variable `text` to the original process that was sent.
 
-4) Rholang runtime environments may choose to include built-in processes listening on channels.  In this tutorial, we use `new` with the URN `rho:io:stdout` to request a channel where sent messages get printed to a console.
+4. Rholang runtime environments may choose to include built-in processes listening on channels.  In this tutorial, we use `new` with the URN `rho:io:stdout` to request a channel where sent messages get printed to a console.
 
 ### Name Equivalence
 It is possible to write one single name in several different ways. For example, the two following channels are equivalent:
@@ -135,9 +135,9 @@ Finally, channels also respect a change in variable name (alpha equivalence), so
     6   helloWorld!("Hola, mundo!")
     7 }
 
-2) Instead of listening for only a single message, a *persistent receive*, `for( ... <= ... ){ ... }`, will spawn a copy of the body for each message received.
+2. Instead of listening for only a single message, a *persistent receive*, `for( ... <= ... ){ ... }`, will spawn a copy of the body for each message received.
 
-5-6) We send the string processes `"Hello, world!"` and `"Hola, mundo!"` on the channel whose name is stored in the variable `helloWorld`.  The order of processing is nondeterministic.
+5-6. We send the string processes `"Hello, world!"` and `"Hola, mundo!"` on the channel whose name is stored in the variable `helloWorld`.  The order of processing is nondeterministic.
 
 ## Contracts as sugar for replicated receive
 
