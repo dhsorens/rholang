@@ -92,7 +92,7 @@ The following program will print the text `"Hello, world"` to a console.
 
 3) This `for` production creates a process that waits for a single message to be sent on the channel whose name is stored in the variable `helloWorld`.  The pattern `@text` gets matched against the serialized process, binding the process-valued variable `text` to the original process that was sent.
 
-4) Rholang runtime environments may choose to include built-in processes listening on channels.  In this tutorial, we use `new` with the urn `rho:io:stdout` to request a channel where sent messages get printed to a console.
+4) Rholang runtime environments may choose to include built-in processes listening on channels.  In this tutorial, we use `new` with the URN `rho:io:stdout` to request a channel where sent messages get printed to a console.
 
 ### Name Equivalence
 It is possible to write one single name in several different ways. For example, the two following channels are equivalent:
@@ -100,13 +100,21 @@ It is possible to write one single name in several different ways. For example, 
     @{10 + 2}
     @{5 + 7}
 
-Any message sent over these channels can be received by listening on the channel `@12`. There are other instances in which a name can be written in two different ways. The guiding principle for this is that if `P` and `Q` are two equivalent processes, then `@P` and `@Q` are equivalent names. In particular, all of the following channels are equivalent:
+Any message sent over these channels can be received by listening on the channel `@12`.  There are other instances in which a name can be written in more than one way.  The guiding principle for this comes from the RHO calculus: if `P` and `Q` are equivalent processes, then `@P` and `@Q` are equivalent names.
 
-    @{ P | Q }
-    @{ Q | P }
-    @{ Q | P | Nil }
+The par `|` operator is associative, commutative, and has the process `Nil` as its identity. This amounts to the following:
 
-Before using a channel, Rholang first evaluates expressions and accounts for these `|` rules at the top level--but only at the top level. This means that if an arithmetic expression forms part of a pattern within a pattern, it is left untouched. Because of this,
+	  (i) `P` and `P | Nil` are equivalent
+ 	 (ii) `P | Q` and `Q | P` are equivalent
+	  (iii) `(P | Q) | R` and `P | (Q | R)` are equivalent
+
+In particular, all of the following channels are equivalent:
+
+ 	 @{P | Q}
+	  @{Q | P}
+	  @{P | Nil | Q}
+
+Before using a channel, Rholang first evaluates expressions and accounts for these `|` rules at the top level--but only at the top level.  This is a big departure from the RHO calculus!  This means that if an arithmetic expression forms part of a pattern within a pattern, it is left untouched. Because of this,
 
     for( @{ x + 5 } <- @"chan" ){ ... }
 
