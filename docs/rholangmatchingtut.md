@@ -149,9 +149,13 @@ The other illegal move we ought to cover has to do with the `match` process. Rem
 since, if it did match, `y` would match to `x => {@Nil!(x)}`, which is neither a process nor a name.
 
 ## Patterns With Parallel Processes
-When using parallel processes in patterns, it is sometimes not immediately obvious how a pattern will match. Take for example the following receive:
+When using parallel processes in patterns, the matching may be immdeiate. E.g. consider the receive:
+	
+    `for( @{x | 23} <- @Nil ){ Nil }`
+    
+Given a send of the form `@Nil!(19 | 23)`, the pattern `x | 23` matches immediately with the process `19 | 23`, binding `x` to `19`. However, it is sometimes not immediately clear how a pattern will match. E.g. consider the receive:
 
-    for( @{x | y} <- @Nil ){ Nil }
+    `for( @{x | y} <- @Nil ){ Nil }`
 
 Given a send of the form `@Nil!(10 | 20)`, we might expect the receive to bind `x` to `10` and `y` to `20`. However, this match is not so straightforward. Since `x | y = y | x`, we just as well could match `x` to `20` and `y` to `10`. Futhermore, since `10 | 20 = 10 | 20 | Nil = Nil | 10 | 20`, the match could take place in a number of ways.
 
