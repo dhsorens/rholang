@@ -18,7 +18,7 @@ Get started with Rholang by selecting one of the options below.
 Rholang has two kinds of values: processes and names.
 
 ### Names
-A name represents a communication channel. You can send messages to a name or you can receive a message from a name. 
+A name represents a communication channel.  You can send messages to a name or you can receive a message from a name.  **Every name is a quoted process** (see below).
 
 The names are created with the `new` construct:
  
@@ -26,7 +26,7 @@ The names are created with the `new` construct:
     //... code using someName
     }
 
-In the above example, the name `someName` is private. By "private", we mean that no other process can send or receive messages over this channel unless we explicitly send its name to the other process.  
+In the above example, the name `someName` is private.  By "private", we mean that no other process can send or receive messages over this channel unless we explicitly send its name to the other process.  
 
 If Rholang is running on the blockchain, the messages sent on this channel will be publicly visible, so it is not "private" in the sense of being secret.  Channels created with `new` cannot be mentioned explicitly in Rholang source code.  Even if you see the bits of a private name on the blockchain, there is no language production to turn those bits back into the name.  
 
@@ -34,24 +34,23 @@ We sometimes use the term "unforgeable" to describe these names when we want to 
 
 Receiving messages over a channel is done using the `for` construct:
 
-    for( x1 <- channel1, ..., xn <- channeln) {
+    for( x1 <- channel1, ..., xn <- channeln ){
     ...
     }
 
 ### Processes
-In Rholang everything is a process. Values like strings, booleans or numbers are also processes. 
-The processes can be aggregated using the operator '|'. Below are a few examples:
+In Rholang everything is derived from a *process*. Values like strings, booleans or numbers are simply processes.  The processes can be aggregated using the *par* operator '|'. Below are a few examples of processes:
 
     1
     true
     1 + 1
     new myName in {...}
-    someName ! ("hello")
-    for( x <- someChannel) { ... }
+    someName!("hello")
+    for( x <- someChan ){ ... }
     p | q
 
 ### Primitive values
-Rholang currently supports integers, strings, booleans, tuples, lists, sets and maps.
+Rholang currently supports integers, strings, booleans, tuples, lists, sets, maps, URIs, and tuples.
 
 ### Expressions
 Expressions are special because they are evaluated before sending the result to a channel. 
@@ -68,34 +67,34 @@ The supported relational operators are: `>`, `>=`, `<`, `<=', `==`, `!=`.
 The supported logical operators are: `and`, `or`, `not`.
  
 #### Matches expression
-The `p matches q` expression is similar to  
+Let `p` be a process and `q` be a pattern. The `p matches q` expression is similar to  
 
     1 match p {
-    2   q -> true
-    3   _ -> false
+    2   q => true
+    3   _ => false
     4 }
     
-The difference between `matches` and the above is that the former is an expression.
+The only difference between `p matches q` and the above is that the former is an expression.
 
 ## Sending and receiving data
+The following program will print the text `"Hello, world"` to a console.
 
-    1 new HelloWorld, stdout(`rho:io:stdout`) in {
-    2   HelloWorld!("Hello, world!") |
-    3   for (@text <- HelloWorld) {
-    4     stdout!(text)
+    1 new helloWorld, display(`rho:io:stdout`) in {
+    2   helloWorld!("Hello, world!") |
+    3   for ( @text <- helloWorld ){
+    4     display!(text)
     5   }
     6 }
 
-1) This line declares a new name-valued variable `HelloWorld` and assigns to it a newly-created private name.  
+1) This line declares a new name-valued variable `helloWorld` and assigns to it a newly-created private name.  
 
-2) Every name is of the form `@P`, where `P` is a rholang process.  The `!` production takes a name `n` on its left and a process `P` on its right, then sends `@P` over the channel named `n`.  Line 2 forms the name `@"Hello, world"` and sends it on the channel whose name is stored in the variable `HelloWorld`.
+2) Every name is of the form `@P`, where `P` is a Rholang process.  The `!` production takes a name `n` on its left and a process `P` on its right, then sends `@P` over the channel named `n`.  Line 2 forms the name `@"Hello, world"` and sends it on the channel whose name is stored in the variable `helloWorld`.
 
-3) This `for` production creates a process that waits for a single message to be sent on the channel whose name is stored in the variable `HelloWorld`.  The pattern `@text` gets matched against the serialized process, binding the process-valued variable `text` to the original process that was sent.
+3) This `for` production creates a process that waits for a single message to be sent on the channel whose name is stored in the variable `helloWorld`.  The pattern `@text` gets matched against the serialized process, binding the process-valued variable `text` to the original process that was sent.
 
-4) Rholang runtime environments may choose to include built-in processes listening on channels.  In this tutorial, we use new with the urn `rho:io:stdout` to request a channel where sent messages get printed to a console.
+4) Rholang runtime environments may choose to include built-in processes listening on channels.  In this tutorial, we use `new` with the urn `rho:io:stdout` to request a channel where sent messages get printed to a console.
 
 ### Name Equivalence
-
 It is possible to write one single name in several different ways. For example, the two following channels are equivalent:
 
     @{10 + 2}
