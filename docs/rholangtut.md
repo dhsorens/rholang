@@ -102,10 +102,11 @@ It is possible to write one single name in several different ways. For example, 
 
 Any message sent over these channels can be received by listening on the channel `@12`.  There are other instances in which a name can be written in more than one way.  The guiding principle for this comes from the RHO calculus: if `P` and `Q` are equivalent processes, then `@P` and `@Q` are equivalent names.
 
-The par `|` operator is associative, commutative, and has the process `Nil` as its identity. This amounts to the following:
-	(i) `P` and `P | Nil` are equivalent
- 	(ii) `P | Q` and `Q | P` are equivalent
-	(iii) `(P | Q) | R` and `P | (Q | R)` are equivalent
+The par `|` operator is associative, commutative, and has the process `Nil` as its identity.  This amounts to the following:
+	
+	(i) P and P | Nil are equivalent
+ 	(ii) P | Q and Q | P are equivalent
+	(iii) (P | Q) | R and P | (Q | R) are equivalent
 
 In particular, all of the following channels are equivalent:
 
@@ -121,22 +122,22 @@ will never receive any message on `@"chan"` since if we send anything, such as `
 
 Finally, channels also respect a change in variable name (alpha equivalence), so the following channels are equivalent:
 
-    @{ for( x <- chan ){ ... } }
-    @{ for( z <- chan ){ ... } }
+    @{for( x <- chan ){ ... }}
+    @{for( z <- chan ){ ... }}
 
-## Replicated receive
+## Persistent receive
 
-    1 new HelloWorld, stdout(`rho:io:stdout`) in {
-    2   for (@text <= HelloWorld) {
-    3     stdout!(text)
+    1 new helloWorld, console(`rho:io:stdout`) in {
+    2   for( @text <= helloWorld ){
+    3     console!(text)
     4   } |
-    5   HelloWorld!("Hello, world!") |
-    6   HelloWorld!("Hola, mundo!")
+    5   helloWorld!("Hello, world!") |
+    6   helloWorld!("Hola, mundo!")
     7 }
 
-2) Instead of handling only a single message, a `for` using a double arrow `<=` will persist, spawning a copy of the body for each message received.
+2) Instead of listening for only a single message, a *persistent receive*, `for( ... <= ... ){ ... }`, will spawn a copy of the body for each message received.
 
-5-6) We send the string processes `"Hello, world!"` and `"Hola, mundo!"` on the channel `HelloWorld`.  It is non-deterministic which message will be processed first.
+5-6) We send the string processes `"Hello, world!"` and `"Hola, mundo!"` on the channel whose name is stored in the variable `helloWorld`.  It is non-deterministic which message will be processed first.
 
 ## Contracts as sugar for replicated receive
 
