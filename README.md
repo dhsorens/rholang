@@ -7,8 +7,13 @@ modifications to accommodate joins in receives, the configuration probably doesn
 or get more cells.
 
 Most of the computation in matching is done via the structural type system. The type system is set
+<<<<<<< HEAD
 up in such a way that pattern-matching is type inclusion. Thus pattern matching is done via the
 type inclusion predicate `#isIn` which lives in `is-in.k`.
+=======
+up in such a way that pattern-matching is type inclusion. Thus, pattern matching is done via the
+type inclusion predicate `#isIn` in `is-in.k`.
+>>>>>>> 44c741a134f64e57adc51f974b79074acd2423d1
 
 Generating a type does not require any extra cells in the configuration because we use strict
 functions with carefully chosen syntactic categories so that K will do those computations for us,
@@ -27,7 +32,7 @@ function, without using cells, to do it.
 
 Rules should be written without cells as much as possible.
 
-## Type system
+## Type System
 The type system is the mathematical core of the framework, and greatly simplifies pattern-matching
 in a nice, coherent theory. In Rholang, any program can be thought of as a pattern that only matches
 to one thing. This observation unifies all of Rholang code as patterns.
@@ -60,9 +65,14 @@ might yield something like
 ```
 
 and
+<<<<<<< HEAD
 ```
   @{Process}
 ```
+=======
+
+    @{Process}
+>>>>>>> 44c741a134f64e57adc51f974b79074acd2423d1
 
 might yield something like
 ```
@@ -91,7 +101,7 @@ The type system's full definition can be found in `type.k`. Each node has the sy
 
 which is a format admittedly difficult for a human to read, but natural for K.
 
-## The inclusion predicate
+## The Inclusion Predicate
 A `Process` matches a `Pattern` if one can start with `type(Pattern)` and end up with
 `type(Process)` by doing any combination of the following:
 - attaching a process onto a free process variable leaf on `type(Pattern)`
@@ -109,7 +119,7 @@ One could think of `/\` and `\/` alternatively as type unions and intersections.
 The inclusion predicate `#isIn` checks that these steps can be made via a recursive algorithm
 outlined in `is-in.k` and rewrites to a boolean.
 
-## Equality of types
+## Equality of Types
 We say two types are equal iff `Type1 #isIn Type2` and `Type2 #isIn Type1` are both `true`. This
 is just checking tree equality.
 
