@@ -1,0 +1,95 @@
+digraph G {
+
+    rankdir=BT
+
+    bundle  [label="BUNDLE"];
+    config  [label="CONFIGURATION"];
+    dom     [label="DOMAINS"];
+    domsyn  [label="DOMAINS-SYNTAX"];
+    initial [label="INITIAL-CHECKS"];
+    iseq    [label="IS-EQUAL-TO"];
+    isin    [label="IS-IN"];
+    isname  [label="IS-NAME"];
+    isproc  [label="IS-PROC"];
+    ispub   [label="IS-PUBLIC"];
+    match   [label="MATCH"];
+    meth    [label="METHOD"];
+    norm    [label="NORMALIZER"];
+    patmat  [label="PATTERN-MATCH"];
+    proc    [label="PROCESSES"];
+    rec     [label="RECEIVE"];
+    rho     [label="RHO"];
+    rhosyn  [label="RHO-SYNTAX"];
+    send    [label="SEND"];
+    sub     [label="SUBSTITUTION"];
+    tupsp   [label="TUPLE-SPACE"];
+    type    [label="TYPE"];
+    t2p     [label="TYPE2PROC"];
+
+    bundle -> rho;
+
+    config -> rho;
+
+    dom -> rho;
+
+    domsyn -> rhosyn;
+
+    initial -> rho;
+
+    iseq -> rho;
+
+    isin -> match;
+    isin -> rho;
+
+    isproc -> rho;
+
+    ispub -> rec;
+    ispub -> send;
+    ispub -> rho;
+
+    match -> rho;
+
+    meth -> rho;
+
+    norm -> rho;
+
+    patmat -> tupsp;
+    patmat -> rho;
+
+    proc -> rho;
+
+    rec -> tupsp;
+    rec -> rho;
+
+    rhosyn -> bundle;
+    rhosyn -> config;
+    rhosyn -> match;
+    rhosyn -> meth;
+    rhosyn -> proc;
+    rhosyn -> rec;
+    rhosyn -> send;
+    rhosyn -> type;
+    rhosyn -> rho;
+
+    send -> tupsp;
+    send -> rho;
+
+    sub -> rhosyn;
+
+    tupsp -> rho;
+
+    type -> iseq;
+    type -> isin;
+    type -> isname;
+    type -> isproc;
+    type -> ispub;
+    type -> patmat;
+    type -> proc;
+    type -> tupsp;
+    type -> t2p;
+    type -> rho;
+
+    t2p -> patmat;
+    t2p -> rho;
+
+}

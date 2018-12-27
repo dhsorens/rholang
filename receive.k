@@ -16,7 +16,7 @@ rule <thread> ... <k> for( Ptn:NamePats <- Chn:Name ){ Body:Proc } </k> ... </th
      </In>
      #fi
 
-//    peek
+// Peek
 //rule <thread> ... <k> for( Ptn:NamePats <! Chn:Name ){ Body:Proc } </k> ... </thread>
 
 // Repeated

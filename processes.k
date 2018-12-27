@@ -67,7 +67,7 @@ rule new X:NameVar ( U:Uri ) NDs:NameDeclarations in { P:Proc }
   => new X(U) in { new NDs in { P } }
 
 // Parallel Processes
-// Note that this separations happens from the left b/c of the way the syntax is written
+// Note that this separation happens from the left b/c of the way the syntax is written
 // i.e. P1 | P2 | P3 first separates into P1 and P2 | P3 and then into P1, P2, and P3.
 rule <thread> ... <k> P1 | P2 </k> ... </thread>
 =>   <thread> ... <k> P1:Proc </k> ... </thread>

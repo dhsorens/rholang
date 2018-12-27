@@ -1,5 +1,5 @@
 # Rholang
-This is the most up-to-date K-Framework for Rholang. It will kompile in K5, but apart from the
+This is the most up-to-date K Framework for Rholang. It will kompile in K5, but apart from the
 structural type system implemented in `type.k`, most of the rest of the code is just an outline.
 
 This design is minimalist in the number of cells required in the configuration. Modulo small
@@ -8,18 +8,18 @@ or get more cells.
 
 Most of the computation in matching is done via the structural type system. The type system is set
 up in such a way that pattern-matching is type inclusion. Thus pattern matching is done via the
-type inclusion predicate `#isIn` in `is-in.k`.
+type inclusion predicate `#isIn` which lives in `is-in.k`.
 
 Generating a type does not require any extra cells in the configuration because we use strict
 functions with carefully chosen syntactic categories so that K will do those computations for us,
 without needing to outline the exact computation somewhere in a cell. That means we only need
-threads with a `<k>`-cell and a tuple space to model Rholang's computation.
+threads with a `<k>`-cell and a tuplespace to model Rholang's computation.
 
 The auxiliary functions `#isEqualTo`, `#isProc`, `#isName`, `#type2proc`, etc. should also lend
 themselves to computation with strict functions instead of explicit cells. The inclusion predicate
 is nearly finished, except for some comments in the algorithm itself.
 
-The tuple space is modeled in `tuple-space.k`. The rules for matching ought to be able to match
+The tuplespace is modeled in `tuple-space.k`. The rules for matching ought to be able to match
 simply by using a `required` clause at the end (see the given e.g. rule). That makes it so we don't
 have to explicitly keep track of which matches have been checked. How to handle joins is still an
 unsolved problem, but I suspect one could either slightly modify the type system or write a nice
@@ -34,39 +34,44 @@ to one thing. This observation unifies all of Rholang code as patterns.
 
 In this line of thought, for each pattern (or process) in Rholang we can assign a type,
 written as an abstract syntax tree (AST). The AST is defined recursively. For example:
-
-    for( NamePatterns <- Channel ){ Body }
+```
+  for( NamePatterns <- Channel ){ Body }
+```
 
 might yield
-
-                    "LinearListen"
-                        /     \
-                     "bind"  type(Channel)
+```
+                       "LinearListen"
+                        /          \
+                     "bind"       type(Channel)
                      /    \
-      type(NamePatterns)  type(Body)
+     type(NamePatterns)  type(Body)
+```
 
 A pattern such as
-
-    Name!(TupleOfProcesses)
+```
+  Name!(TupleOfProcesses)
+```
 
 might yield something like
-
-         "SingleSend"
-           /      \
-    type(Name)   type(TupleOfProcesses)
+```
+          "SingleSend"
+           /        \
+    type(Name)    type(TupleOfProcesses)
+```
 
 and
-
-    @ Process
+```
+  @{Process}
+```
 
 might yield something like
-
+```
           "quote"
              |
        type(Process)
+```
 
-*(Note that the resulting type doesn't have to be a binary tree, but in the implementation it is for
-simplicity. In cases like the one above, the second branch is a special `#truncate` node.)*
+*(Note that the resulting type doesn't have to be a binary tree, but in the implementation it is for simplicity. In cases like quote, the second branch is a special `#truncate` node.)*
 
 We complete the AST recursively by expanding along the leaves.
 
@@ -80,8 +85,9 @@ for, or the pattern being sent. This might open the door to a more extensive set
 provable properties for Rholang code.
 
 The type system's full definition can be found in `type.k`. Each node has the syntax
-
-    [ "NodeName" ;; type[LeftNode] ;; type[RightNode] ]
+```
+ [ "NodeName" ;; type[LeftNode] ;; type[RightNode] ]
+```
 
 which is a format admittedly difficult for a human to read, but natural for K.
 
