@@ -89,6 +89,9 @@ The predicate `#isProc` (resp. `#isName`) checks to see that a given type is a p
 
 This amounts to checking that there are no globally free variables (i.e. free variable leaves), or wildcards outside of self-contained patterns, or logical connectives where they ought not be, etc. Essentially, checking that the operations for inclusions don't yield any other types.
 
+## Module dependencies
+![Module dependencies](/Documents/Isaac/RChain/Rholang/Git/Dependencies_RholangInK.png)
+
 ## Future work
 Formal writeup and proof that this type system behaves as intended. It would make for a good paper.
 
