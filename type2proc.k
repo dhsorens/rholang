@@ -1,5 +1,5 @@
 module TYPE2PROC
-imports TYPE
+import TYPE
 // Converts a process's type back to the original process (or something equivalent to it)
 
 syntax Proc ::= "#type2proc" Type

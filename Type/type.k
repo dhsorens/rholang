@@ -48,7 +48,6 @@ endmodule
 
 module TYPE
 import TYPE-SYNTAX
-
 // For strictness
 syntax          KResult ::= TerminalType
 
@@ -234,7 +233,7 @@ rule   type[ P1:ProcPat | P2:ProcPat ] => type[ "par" ;; type[P1] ;; type[P2] ]
 // **************************
 
 // Quoted processes
-rule                  type[ @ P:Proc ] => type[ "quote" ;; type[P]   ;; type[#truncate] ]
+rule                   type[ @P:Proc ] => type[ "quote" ;; type[P]   ;; type[#truncate] ]
 
 // Name variables
 rule                type[ NV:NameVar ] => type[ "leaf"  ;; "namevar" ;; NV ]

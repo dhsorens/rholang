@@ -1,0 +1,3 @@
+// Type rewrite
+
+type[ not ( Nil == @Nil!(Nil) ) or (Nil != for( @Nil <- @Nil ){ Nil }) ]
