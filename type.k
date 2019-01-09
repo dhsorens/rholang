@@ -73,8 +73,8 @@ rule type[ [ Sng:Proc           ] ] => type[ "list" ;; type[Sng]  ;; type[#trunc
 
 //   RhoTuple
 rule type[ ( Hd:Proc , Md:Proc , Tl:Procs ) ] => type[ "tuple" ;; type[Hd]  ;; type[ (Md,Tl) ] ]
-rule type[ ( Hd:Proc , Tl:Proc            ) ] => type[ "tuple" ;; type[Hd]  ;; type[ ( Tl ,) ] ]
-rule type[ ( Sng:Proc                    ,) ] => type[ "tuple" ;; type[Sng] ;; type[#truncate] ]
+rule type[ ( Hd:Proc , Tl:Proc            ) ] => type[ "tuple" ;; type[Hd]  ;; type[ ( Tl  ) ] ]
+rule type[ ( Sng:Proc                     ) ] => type[ "tuple" ;; type[Sng] ;; type[#truncate] ]
 
 //   RhoSet
 rule type[ Set( Hd:Proc , Tl:Procs ) ] => type[ "set" ;; type[Hd]  ;; type[ Set(Tl) ] ]
@@ -160,9 +160,10 @@ rule type[ if ( B:Bool ) PTrue:Proc else PFalse:Proc ]
 // New
 rule type[ new N:NameDeclarations in { Body:Proc} ] => type[ "new" ;; type[N] ;; type[Body] ]
 
-rule type[ Hd:NameDeclaration, Tl:NameDeclarations ]
-                                  => type[ "namedeclarations"   ;; type[Hd] ;; type[Tl] ]
-rule type[ NV:NameVar ( U:Uri ) ] => type[ "urinamedeclaration" ;; type[NV] ;; type[U]  ]
+rule type[    Hd:NameDeclaration, Tl:NameDeclarations ]
+                                     => type[ "namedeclarations"   ;; type[Hd] ;; type[Tl] ]
+
+rule type[    NV:NameVar ( U:Uri ) ] => type[ "urinamedeclaration" ;; type[NV] ;; type[U]  ]
 
 // Parallel
 rule type[ P1:ProcPat | P2:ProcPat ] => type[ "par" ;; type[P1] ;; type[P2] ]
@@ -172,7 +173,7 @@ rule type[ @P:Proc    ] => type[ "quote" ;; type[P]   ;; type[#truncate] ]
 rule type[ NV:NameVar ] => type[ "leaf"  ;; "namevar" ;; NV              ]
 
 // *** Pattern types ***
-// Collection pat
+// Collection Pat
 //   RhoListPat Multiple
 rule type[ [Hd1:ProcPat, Hd:ProcPats,   ... Tl:ProcVar] ]
                     => type[ "rholistpathead" ;; type[Hd1] ;; type[[Hd,    ... Tl]] ]
