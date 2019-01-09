@@ -2,12 +2,12 @@
 
 ## Priority
 * Formal semantics in K (finish implementation started by Derek and Martin)
- - [rho-syntax.k](https://github.com/Isaac-DeFrain/krho/blob/Matching/rho-syntax.k)
+ - [rhosyntax.k](https://github.com/Isaac-DeFrain/rholang/blob/master/Syntax/rhosyntax.k)
  - [pattern-match.k](https://github.com/Isaac-DeFrain/krho/blob/Matching/pattern-match.k)
  - [Normalizer in Rholang](https://rchain.atlassian.net/wiki/spaces/CORE/pages/506331242/Rholang+interpreter+overview)
 
 * Structural-behavioral type system for Rholang in K
- - Type system [GitHub](https://github.com/Isaac-DeFrain/rholang)
+ - [type.k](https://github.com/Isaac-DeFrain/rholang/blob/master/Type/type.k)
  - Pattern matching is type inclusion [is-in.k](https://github.com/Isaac-DeFrain/rholang/blob/master/is-in.k)
 
 
