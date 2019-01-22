@@ -1,9 +1,9 @@
-module TUPLE-SPACE
-imports SEND
-imports RECEIVE
-imports TYPE
-imports IS-EQUAL-TO
-imports PATTERN-MATCH
+module TUPLESPACE
+import SEND
+import RECEIVE
+import TYPE
+import IS-EQUAL-TO
+import PATTERN-MATCH
 
 // (The idea is roughly this)
 rule
