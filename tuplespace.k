@@ -1,9 +1,20 @@
-module TUPLESPACE
-import SEND
-import RECEIVE
-import TYPE
+require "../Is-Equal-To/is-equal-to.k"
+require "../Pattern-Match/pattern-match.k"
+require "../Receive/receive.k"
+require "../Send?send.k"
+require "../Type/type.k"
+
+module TUPLESPACE-SYNTAX
 import IS-EQUAL-TO
 import PATTERN-MATCH
+import RECEIVE
+import SEND
+import TYPE
+
+endmodule
+
+module TUPLESPACE
+import TUPLESPACE-SYNTAX
 
 // (The idea is roughly this)
 rule

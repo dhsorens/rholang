@@ -1,9 +1,11 @@
-module IS-EQUAL-TO
-imports TYPE
-// the #isEqualTo type predicate
-// checks to see if two types are identically equal
+require "../Type/type.k"
 
-syntax Bool ::= Type "#isEqualTo" Type [function]
+module IS-EQUAL-TO-SYNTAX
+import TYPE
+
+// the #isEqualTo type predicate checks to see if two types are identically equal
+
+syntax Bool ::= Type "#isEqualTo" Type  [function]
 
 
 // Semantics
@@ -12,5 +14,7 @@ syntax Bool ::= Type "#isEqualTo" Type [function]
 // match. This difference is at the leaves; the leaves
 // only check equality.
 
-
 endmodule
+
+module IS-EQUAL-TO
+import IS-EQUAL-TO-SYNTAX

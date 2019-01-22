@@ -1,6 +1,16 @@
+require "../Syntax/rhosyntax.k"
+
+module METHOD-SYNTAX
+imports RHOSYNTAX
+
+endmodule
+
 module METHOD
-imports RHO-SYNTAX 
+import METHOD-SYNTAX
 // Semantics for different methods
+
+// add
+
 
 // nth
 
@@ -15,9 +25,6 @@ imports RHO-SYNTAX
 
 
 // diff
-
-
-// add
 
 
 // delete

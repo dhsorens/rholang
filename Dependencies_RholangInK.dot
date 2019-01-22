@@ -22,7 +22,7 @@ digraph G {
     rhosyn  [label="RHO-SYNTAX"];
     send    [label="SEND"];
     sub     [label="SUBSTITUTION"];
-    tupsp   [label="TUPLE-SPACE"];
+    tupsp   [label="TUPLESPACE"];
     type    [label="TYPE"];
     t2p     [label="TYPE2PROC"];
 

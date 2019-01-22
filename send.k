@@ -1,55 +1,65 @@
-module SEND
-import RHO-SYNTAX
+require "../Is-Public/is-public.k"
+require "../Syntax/rhosyntax.k"
+
+module SEND-SYNTAX
+import RHOSYNTAX
 import IS-PUBLIC
+
+endmodule
+
+module SEND
+import SEND-SYNTAX
 
 // Sends
 //   single
-rule <thread>... <k> N:Name !  (P:Proc)    </k> ...</thread>
-  => #if #isPublic N
+rule #if #isPublic N:Name
      #then
-     <thread>... <k> Nil </k> ...</thread> //do we want to rewrite N!(P) to Nil?
+     <k> N ! (P:Proc) => . ...</k>
      #else
-     <Out>
-       <mailto> N     </mailto>
-       <msg>    P     </msg>
-       <single> true  </single>
-     </Out>
+     <k> N ! (P:Proc) => . ...</k>
+     (. => <sends>
+             <mailto>  N    </mailto>
+             <msg>     P       </msg>
+             <single> true  </single>
+           </sends>)
      #fi
 
-rule <thread>... <k> N:Name !  RT:RhoTuple </k> ...</thread>
-  => #if #isPublic N
+rule #if #isPublic N:Name
      #then
-     <thread>... <k> Nil </k> ...</thread>
+     <k> N !  RT:RhoTuple => . ...</k>
      #else
-     <Out>
-       <mailto> N     </mailto>
-       <msg>    P     </msg>               //should P be RT?
-       <single> true  </single>
-     </Out>
+     <k> N !  RT:RhoTuple => . ...</k>
+     (. => <sends>
+             <mailto>  N   </mailto>
+             <msg>     RT     </msg>
+             <single> true </single>
+           </sends>)
      #fi
 
 //   persistent
-rule <thread>... <k> N:Name !! (P:Proc)    </k> ...</thread>
-  => #if #isPublic N
+rule #if #isPublic N:Name
      #then
-     <thread>... <k> Nil </k> ...</thread>
+     <k> N !! (P:Proc) => . ...</k>
      #else
-     <Out>
-       <mailto> N     </mailto>
-       <msg>    P     </msg>
-       <single> false </single>
-     </Out>
+     <k> N !! (P:Proc) => . ...</k>
+     (. => <sends>
+             <mailto>   N   </mailto>
+             <msg>      P      </msg>
+             <single> false </single>
+           </sends>)
      #fi
 
-rule <thread>... <k> N:Name !! RT:RhoTuple </k> ...</thread>
-  => #if #isPublic N #then
-     <thread>... <k> Nil </k> ...</thread>
+rule #if #isPublic N:Name
+     #then
+     <k> N !! RT:RhoTuple => . ...</k>
      #else
-     <Out>
-       <mailto> N     </mailto>
-       <msg>    P     </msg>               //should P be RT?
-       <single> false </single>
-     </Out>
+     <k> N !! RT:RhoTuple => . ...</k>
+     (. => <sends>
+             <mailto>   N   </mailto>
+             <msg>      RT     </msg>
+             <single> false </single>
+           </sends>)
      #fi
 
 endmodule
+

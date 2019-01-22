@@ -1,17 +1,24 @@
-module BUNDLE
-imports RHO-SYNTAX
+require "../Syntax/rhosyntax.k"
 
-// Bundles
+module BUNDLE-SYNTAX
+import RHOSYNTAX
+
+endmodule
+
+module BUNDLE
+import BUNDLE-SYNTAX
 
 // bundle0
+// no read or write
 
 // bundle+
+// write only
 
 // bundle-
-
-// bundle0
+// read only
 
 // bundle
+// read/write
 
 
 endmodule

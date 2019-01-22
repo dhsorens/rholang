@@ -1,5 +1,7 @@
-module  IS-IN
-imports TYPE
+require "../Type/type.k"
+
+module IS-IN-SYNTAX
+import TYPE
 // The #isIn predicate
 // Checks for type inclusion
 
@@ -9,6 +11,11 @@ syntax Bool ::= Type "#isIn"       Type [function,strict]
 // Auxiliaries
 syntax Bool ::= Type "#isIn-leaf"  Type [function,strict]
 syntax Bool ::= Type "#isIn-patrn" Type [function,strict]
+
+endmodule
+
+module IS-IN
+import IS-IN-SYNTAX
 /*
 // Semantics for the #isIn predicate
 rule [ StringPCS:String ;; PCSType1:Type ;; PCSType2:Type ] #isIn

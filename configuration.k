@@ -1,27 +1,37 @@
+require "../Syntax/rhosyntax.k"
+
+module CONFIGURATION-SYNTAX
+imports RHOSYNTAX
+
+endmodule
 
 module CONFIGURATION
-imports RHO-SYNTAX
+import CONFIGURATION-SYNTAX
 
-// Configuration
-configuration <T color="yellow">
-                // Concurrent threads for processes to run
-                <thread multiplicity="*">
-                  <k color="red"> $PGM:Proc </k>
-                </thread>
-                // The tuple space
-                <In multiplicity="*">
-                  <mailfrom> .K  </mailfrom> // list of names
-                  <guard>    .K  </guard> // list of patterns
-                  <body>     .K  </body>
-                  // Bool to determine whether or not is persistent
-                  <linear>   .K  </linear>
-                </In>
-                <Out multiplicity="*">
-                  <mailto>   .K  </mailto>  // list of names
-                  <msg>      .K  </msg>
-                  // Bool to determine whether or not is persistent
-                  <single>   .K  </single>
-                </Out>
-              </T>
+configuration 
+  <T>
+    <threadpool>
+      <thread color="red" multiplicity="*">
+        <k> $PGM:Proc </k>
+      </thread>
+    </threadpool>
+    <tuplespace>
+      <receives color="purple">
+        <receive color="green" multiplicity="*">
+          <fromchan> .K  </fromchan>              // list of names
+          <guard>    .K     </guard>              // list of patterns
+          <body>     .K      </body>
+          <linear>   .K    </linear>              // Bool to determine whether or not is persistent
+        </receive>
+      </receives>
+      <sends color="blue">
+        <send color="teal" multiplicity="*">
+            <tochan> .K  </tochan>                // channel
+            <msg>    .K     </msg>                // message
+            <single> .K  </single>                // Bool to determine whether or not is persistent
+        </send>
+      </sends>
+    </tuplespace>
+  </T>
 
 endmodule

@@ -9,26 +9,25 @@ import DOMAINS-SYNTAX
 // -------------
 
 // Process
-syntax Proc ::= "{" Proc "}"                                      [bracket]  // Bracket
-              | Ground                                                       // Ground terms
-              | Collection                                                   // Collection
-              | ProcVar                                                      // Process variables
-              | "Nil"                                                        // Stopped process
-              > VarRef                                                       // Variable reference
-              > "*" Name                                                     // Evaluate/Reify
-              > Proc "." Method "(" MethodArgs ")"                           // Method
-              > AExp                                                         // Arithmetic expressions
-              > Bool                                                         // Boolean expressions
-              > Name Send                                                    // Send
-             // Contract **needs to be given an alias which binds**
-              > "contract" Name "(" NamePats ")" "=" "{" Proc "}"
-              | "for" "(" Receipt ")" "{" Proc "}"                 [binder]  // Listen
-              | "match" Proc "{" MatchCases "}"                              // Match
-              | Bundle "{" Proc "}"                                          // Bundle
-              > "if" "(" Bool ")" Proc                          [strict(1)]  // If ... then ...
-              | "if" "(" Bool ")" Proc "else" Proc              [strict(1)]  // If ... then ... else ...
-              | "new" NameDeclarations "in" "{" Proc "}"           [binder]  // New
-              > Proc "|" Proc                                        [left]  // Parallel
+syntax             Proc ::= "{" Proc "}"                                      [bracket]  // Bracket
+                          | Ground                                                       // Ground terms
+                          | Collection                                                   // Collection
+                          | ProcVar                                                      // Process variables
+                          | "Nil"                                                        // Stopped process
+                          > VarRef                                                       // Variable reference
+                          > "*" Name                                                     // Evaluate/Reify
+                          > Proc "." Method "(" MethodArgs ")"                           // Method
+                          > AExp                                                         // Arithmetic expressions
+                          > Bool                                                         // Boolean expressions
+                          > Name Send                                                    // Send
+                          > "contract" Name "(" NamePats ")" "=" "{" Proc "}"            // Contract: needs to be given an alias which binds
+                          | "for" "(" Receipt ")" "{" Proc "}"                 [binder]  // Listen
+                          | "match" Proc "{" MatchCases "}"                              // Match
+                          | Bundle "{" Proc "}"                                          // Bundle
+                          > "if" "(" Bool ")" Proc                          [strict(1)]  // If ... then ...
+                          | "if" "(" Bool ")" Proc "else" Proc              [strict(1)]  // If ... then ... else ...
+                          | "new" NameDeclarations "in" "{" Proc "}"           [binder]  // New
+                          > Proc "|" Proc                                        [left]  // Parallel
 
 // Makes it so we _don't_ shadow the variable referenced
 syntax           VarRef ::= "="     ProcVar

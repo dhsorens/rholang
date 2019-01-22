@@ -1,6 +1,9 @@
-module PATTERN-MATCH
-imports TYPE
-imports TYPE2PROC
+require "../Type/type.k"
+require "../Type2Proc/tupe2proc.k"
+
+module PATTERN-MATCH-SYNTAX
+import TYPE
+import TYPE2PROC
 
 // The #patternMatch function
 // Performs substitutions
@@ -12,5 +15,10 @@ syntax Match ::=
               | "#patternMatch" Name "#via" NamePat "#in" Proc
 
 
+
+endmodule
+
+module PATTERN-MATCH
+import PATTERN-MATCH-SYNTAX
 
 endmodule

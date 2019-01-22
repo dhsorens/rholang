@@ -1,23 +1,30 @@
+require "../Type/type.k"
+require "../Syntax/rhosyntax.k"
+
+module PROCESSES-SYNTAX
+import RHOSYNTAX
+import TYPE
+
+endmodule
+
 module PROCESSES
-imports RHO-SYNTAX
-imports TYPE
 
 // Semantics for basic processes
 
 // Ground terms
-rule G:Ground      => .K
+rule _:Ground      => .K
 
 // Collection
-rule C:Collection  => .K
+rule _:Collection  => .K
 
 // Variables (this should be redundant)
-rule PV:ProcVar    => .K
-rule NV:NameVar    => .K
+rule _:ProcVar     => .K
+rule _:NameVar     => .K
 
 // The empty process
 rule Nil           => .K
 
-// Quoting and evaluating
+// Quoting and evaluating i.e. * and @ are inverses
 rule * @{ P:Proc } =>  P
 rule @{ * N:Name } =>  N
 
@@ -31,12 +38,12 @@ rule E1:AExp ++ E2:AExp => E1 ++Int E2
 rule E1:AExp -- E2:AExp => E1 --Int E2
 
 // Boolean expressions
-rule I1:Int <  I2:Int => I1 <Int I2
-rule I1:Int <= I2:Int => I1 <Int I2
-rule I1:Int >  I2:Int => I1 <Int I2
-rule I1:Int >= I2:Int => I1 <Int I2
-rule I1:Int == I2:Int => I1 <Int I2
-rule I1:Int != I2:Int => I1 <Int I2
+rule I1:Int <  I2:Int => I1 <Int  I2
+rule I1:Int <= I2:Int => I1 <=Int I2
+rule I1:Int >  I2:Int => I1 >Int  I2
+rule I1:Int >= I2:Int => I1 >=Int I2
+rule I1:Int == I2:Int => I1 =Int I2
+rule I1:Int != I2:Int => not (I1 =Int I2)
 
 rule not true        => false
 rule not false       => true
@@ -69,8 +76,6 @@ rule new X:NameVar ( U:Uri ) NDs:NameDeclarations in { P:Proc }
 // Parallel Processes
 // Note that this separation happens from the left b/c of the way the syntax is written
 // i.e. P1 | P2 | P3 first separates into P1 and P2 | P3 and then into P1, P2, and P3.
-rule <thread> ... <k> P1 | P2 </k> ... </thread>
-=>   <thread> ... <k> P1:Proc </k> ... </thread>
-     <thread> ... <k> P2:Proc </k> ... </thread>
+rule <k> P1:Proc | P2:Proc </k> => <k> P1 </k> <k> P2:Proc </k>
 
 endmodule
