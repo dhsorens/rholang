@@ -181,7 +181,7 @@ syntax             Name ::= "@" Proc
 
 // Name variable
 syntax          NameVar ::= Var                   // Id
-syntax        NameVars  ::= NameVar               // Id or List{NameVar} or List{Var}
+syntax         NameVars ::= NameVar               // Id or List{NameVar} or List{Var}
                           | NameVar "," NameVars
                           | Vars
 

@@ -1,5 +1,5 @@
 // Structural type system - based on ASTs
-require "rhosyntax.k"
+require "../Syntax/rhosyntax.k"
 
 module TYPE-SYNTAX
 import RHOSYNTAX
@@ -56,7 +56,7 @@ syntax          KResult ::= TerminalType
 // *************
 
 // #type( ) is strict and rewrites as the type of the input
-rule                   #type( T:Type ) => T  [strict]
+rule #type( T:Type ) => T  [strict]
 
 
 // *****************************
