@@ -1,4 +1,4 @@
-require "../Type/type.k"
+require "stype.k"
 
 module IS-NAME-SYNTAX
 import TYPE
@@ -14,6 +14,7 @@ import IS-NAME-SYNTAX
 
 // Semantics
 // Starts at the leaves, 
+// StrName ==String "chan"
 
 
 endmodule
